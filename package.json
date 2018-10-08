@@ -1,0 +1,27 @@
+{
+  "name": "argus",
+  "version": "1.0.0",
+  "description": "Packages required for the project",
+  "main": "argus.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "commander": "^2.18.0",
+    "jest": "^23.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vijayantajain/argus.git"
+  },
+  "author": "Vijayanta Jain, Pradip Lamsal, Zach Luckman, Aaron Sams",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vijayantajain/argus/issues"
+  },
+  "homepage": "https://github.com/vijayantajain/argus#readme"
+}
