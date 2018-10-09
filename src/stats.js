@@ -14,7 +14,7 @@ module.exports = {
         }
     
         return tempSum / arrOfData.length;
-    }
+    },
 	
 	max: function max(arrOfData) {
 		let max = arrOfData[0];
@@ -24,7 +24,7 @@ module.exports = {
 		}
 		
 		return max;
-	}
+	},
 		
 	min: function min(arrOfData) {
 		let min = arrOfData[0];
