@@ -1,6 +1,6 @@
 // Tests for stats.js module
 
-var statsModule = require('..\\src\\stats.js');
+var statsModule = require('../src/stats.js');
 var average = statsModule.average;
 var max = statsModule.max;
 var min = statsModule.min;
