@@ -1,5 +1,6 @@
 // Tests for stats.js module
 
+var path = require('path');
 var statsModule = require(path.join('..', 'src', 'testStats.js'));
 var average = statsModule.average;
 var max = statsModule.max;
