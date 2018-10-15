@@ -15,9 +15,8 @@ console.log('Calculating  ' + process.argv[3]);
 
 //TODO
 // Print Data
-for (let node in listOfNodes) {
-    for (let prpty in listOfNodes[node]) {
-        console.log('The data in each node are ' + dataFile[node][prpty]);
-    }
-    
+for (node in listOfNodes){
+    console.log("The data for "+listOfNodes[node]+":");
+    console.log(dataFile[listOfNodes[node]]);
 }
+
