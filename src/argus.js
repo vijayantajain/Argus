@@ -3,8 +3,10 @@
 //TODO
 //Assert that the file path and the file name exists!
 const fileName = process.argv[2];
+const path = require('path');
+const cwd = __dirname;
 
-let dataFile = require(fileName);
+let dataFile = require(path.join(cwd, '..', 'data', fileName));
 const listOfNodes = Object.getOwnPropertyNames(dataFile);
 
 //TODO
