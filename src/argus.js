@@ -17,6 +17,11 @@ console.log('Calculating  ' + process.argv[3]);
 // Print Data
 for (node in listOfNodes){
     console.log("The data for "+listOfNodes[node]+":");
-    console.log(dataFile[listOfNodes[node]]);
+    for (att in dataFile[listOfNodes[node]]){
+        console.log("The data for "+att+" at "+listOfNodes[node] +":");
+        for (num in dataFile[listOfNodes[node]][att]){
+            console.log(dataFile[listOfNodes[node]][att][num]);
+        }
+    }
 }
 
