@@ -14,6 +14,9 @@ const listOfNodes = Object.getOwnPropertyNames(dataFile);
 console.log('Calculating  ' + process.argv[3]);
 var x=0;
 var divide_me=0;
+var avg=0;
+var highest_avg_temp=0;
+var highest_string;
 //TODO
 // Print Data
 for (node in listOfNodes){
@@ -27,7 +30,16 @@ for (node in listOfNodes){
             console.log(dataFile[listOfNodes[node]][att][num]);
             divide_me+=dataFile[listOfNodes[node]][att][num];
         }
-        console.log("average:"+divide_me+"/"+x+"="+(divide_me/x).toFixed(6));
-    }
+        avg=divide_me/x;
+        console.log("average:"+divide_me+"/"+x+"="+(avg).toFixed(6));
+        console.log(att +" "+ avg);
+        if (att=="arrTemperatureCPU1" || att=="arrTemperatureCPU2"){
+            if (avg>highest_avg_temp){
+                highest_avg_temp=avg;
+                highest_string="Highest average temp: "+highest_avg_temp+" at "+att+" in "+listOfNodes[node];
+            }
+        }
+    } 
 }
+console.log(highest_string);
 
