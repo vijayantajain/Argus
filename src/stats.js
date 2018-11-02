@@ -1,4 +1,8 @@
 //Module containing some statistical functions to be used by `argus` module
+const math = require('mathjs');
+
+const defined_maximum_macro = -10000000000;
+const defined_minimum_macro =  10000000000;
 
 module.exports = {
     /**
@@ -13,10 +17,11 @@ module.exports = {
         let tempSum  = 0;
 
         for (items in arrOfData) {
-            tempSum += arrOfData[items];
+			if (items!=null) {
+				tempSum += arrOfData[items];
+			}
         }
-
-        return tempSum / arrOfData.length;
+        return [tempSum / arrOfData.length];
 	},
 
 	/**
@@ -28,13 +33,21 @@ module.exports = {
 	 */
 
 	max: function max(arrOfData) {
-		let max = arrOfData[0];
-		
-		for (items in arrOfData) {
-			if (arrOfData[items] > max) max = arrOfData[items];
-		}
+		var max;
+		var ind = 0;
 
-		return max;
+		if (arrOfData[0]==null) max = defined_maximum_macro;
+		else max = arrOfData[0];
+		
+		for (var i = 0; i < arrOfData.length; i++) {
+			if (i!=null) {
+				if (arrOfData[i] > max) {
+					max = arrOfData[i];
+					ind = i;
+				}
+			}
+		}
+		return [max, ind+1];
 	},
 	
 	/**
@@ -45,13 +58,41 @@ module.exports = {
 	 * @returns {Double}         The smallest element in `arrOfData`
 	 */
 	min: function min(arrOfData) {
-		let min = arrOfData[0];
+		var min;
+		var ind = 0;
 		
-		for (items in arrOfData) {
-			if (arrOfData[items] < min) min = arrOfData[items];
-		}
+		min = defined_minimum_macro;
 
-		return min;
-	}		
+		for (var i = 0; i < arrOfData.length; i++) {
+			if (arrOfData[i]!=null) {
+				if (arrOfData[i] < min) {
+					min = arrOfData[i];
+					ind = i;
+				}
+			}
+		}
+		return [min, ind+1];
+	},
+	
+	variance: function variance(arrOfData) {
+		return [math.var(arrOfData, 'uncorrected')];
+	},
+
+	sudden_change: function suddenChange(arrOfData) {
+		let max = defined_maximum_macro;
+		var val;
+		var ind;
+
+		for (var i = 0; i<arrOfData.length-1; i++) {
+			if (arrOfData[i]!=null && arrOfData[i+1]!=null) {
+				val = Math.abs(arrOfData[i]-arrOfData[i+1]);
+				if (val>max) {
+					max = val;
+					ind = i;
+				}
+			}
+		}
+		return [max, ind+1];
+	}
 		
 };
