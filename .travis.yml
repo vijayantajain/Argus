@@ -3,6 +3,7 @@ node_js:
     - "node"
     - "8"
 install:
-    - "npm -g install mocha"
+    - "npm install mocha"
+    - "npm install mathjs"
 script:
    - "npm test"
