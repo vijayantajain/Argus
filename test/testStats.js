@@ -15,13 +15,13 @@ describe('average', function () {
 
 describe('max', function () {
     it('should return the maximum value in the input array', function () {
-        assert.equal(62, max([13, 62, 9]));
+        assert.equal([62, 2], max([13, 62, 9]));
     });
 });
 
 describe('min', function () {
     it('should return the minimum value in the input array', function () {
-        assert.equal(9, min([13, 62, 9]));
+        assert.equal([9, 3], min([13, 62, 9]));
     });
 });
 
