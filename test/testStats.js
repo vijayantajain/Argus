@@ -1,16 +1,19 @@
 // Tests for stats.js module
 
-var path = require('path');
-var statsModule = require(path.join('..', 'src', 'stats.js'));
-var average = statsModule.average;
-var max = statsModule.max;
-var min = statsModule.min;
-var assert = require('assert');
+const path = require('path');
+const assert = require('assert');
+const statsModule = require(path.join('..', 'src', 'stats.js'));
+
+const average = statsModule.average;
+const max = statsModule.max;
+const min = statsModule.min;
+const variance = statsModule.variance;
+const suddenChange = statsModule.suddenChange;
 
 describe('average', function () {
     it('should return the average of the input array', function () {
-        assert.equal(2, average([1, 2, 3]));
     });
+    assert.equal(2, average([1, 2, 3]));
 });
 
 describe('max', function () {
@@ -25,3 +28,14 @@ describe('min', function () {
     });
 });
 
+describe('variance', function () {
+    it('should return the variance of the input array', function () {
+        assert.equal(JSON.stringify([1.25]), JSON.stringify(variance([3, 4, 5, 6])));
+    });
+});
+
+describe('suddenChange', function() {
+    it('should return the value and index with sudden change', function () {
+        assert.equal(2, suddenChange([10, 11, 5]));
+    })    
+});
