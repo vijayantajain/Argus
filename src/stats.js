@@ -1,98 +1,124 @@
 //Module containing some statistical functions to be used by `argus` module
 const math = require('mathjs');
 
-const defined_maximum_macro = -10000000000;
-const defined_minimum_macro =  10000000000;
+const DEFINED_MAXIMUM_MACRO = -1e10;
+const DEFINED_MINIMUM_MACRO =  1e10;
 
 module.exports = {
     /**
      * Returns the statistical mean of the input array of data.
      * 
-     * @param {Object} arrOfData Array of data over which values of various
+     * @param {Object} arrayOfData Array of data over which values of various
 	 * 							 statistical functions are to be calculated
 	 * 
-	 * @returns {Double}         Returns the statistical mean of `arrOfData`
+	 * @returns {Double}         Returns the statistical mean of `arrayOfData`
      */
-    average: function average(arrOfData) {
-        let tempSum  = 0;
+    average: function average(arrayOfData) {
 
-        for (items in arrOfData) {
-			if (items!=null) {
-				tempSum += arrOfData[items];
+		let temporarySum  = 0;
+		const NUM_OF_ITEMS = arrayOfData.length;
+
+        for (items in arrayOfData) {
+			if (items != null) {
+				temporarySum += arrayOfData[items];
 			}
-        }
-        return [tempSum / arrOfData.length];
+		}
+
+        return [temporarySum / NUM_OF_ITEMS	];
 	},
+
 
 	/**
 	 * 
-	 * @param {Object} arrOfData Array of data from the which the largest 
+	 * @param {Object} arrayOfData Array of data from the which the largest 
 	 * 							 element is found
 	 *
-	 * @returns {Double}         The largest element in the `arrOfData`
+	 * @returns {Double}         The largest element in the `arrayOfData`
 	 */
 
-	max: function max(arrOfData) {
-		var max;
-		var ind = 0;
+	max: function max(arrayOfData) {
 
-		if (arrOfData[0]==null) max = defined_maximum_macro;
-		else max = arrOfData[0];
+		var max;
+		let index = 0;
+		const NUM_OF_ITEMS = arrayOfData.length;
 		
-		for (var i = 0; i < arrOfData.length; i++) {
-			if (i!=null) {
-				if (arrOfData[i] > max) {
-					max = arrOfData[i];
-					ind = i;
-				}
+		if ( arrayOfData[0] == null) max = DEFINED_MAXIMUM_MACRO;
+		else max = arrayOfData[0];
+		
+		for (let i = 0; i < NUM_OF_ITEMS; i++) {
+
+			if (i != null && arrayOfData[i] > max) {
+
+				max = arrayOfData[i];
+				index = i;
+
 			}
 		}
-		return [max, ind+1];
+
+		return [max, index + 1];
 	},
-	
+
+
 	/**
 	 * 	
-	 * @param {Object} arrOfData Array of data from which the smallest element
+	 * @param {Object} arrayOfData Array of data from which the smallest element
 	 * 							 is obtained
 	 * 
-	 * @returns {Double}         The smallest element in `arrOfData`
+	 * @returns {Double}         The smallest element in `arrayOfData`
 	 */
-	min: function min(arrOfData) {
-		var min;
-		var ind = 0;
-		
-		min = defined_minimum_macro;
+	min: function min(arrayOfData) {
 
-		for (var i = 0; i < arrOfData.length; i++) {
-			if (arrOfData[i]!=null) {
-				if (arrOfData[i] < min) {
-					min = arrOfData[i];
+		var min;
+		let index = 0;
+		const NUM_OF_ITEMS = arrayOfData.length;
+
+		min = DEFINED_MINIMUM_MACRO;
+
+		for (let i = 0; i < NUM_OF_ITEMS; i++) {
+
+			if (arrayOfData[i] != null && arrayOfData[i] < min) {
+					min = arrayOfData[i];
 					ind = i;
-				}
 			}
 		}
+
 		return [min, ind+1];
 	},
-	
-	variance: function variance(arrOfData) {
-		return [math.var(arrOfData, 'uncorrected')];
+
+
+	variance: function variance(arrayOfData) {
+		return [math.var(arrayOfData, 'uncorrected')];
 	},
 
-	sudden_change: function suddenChange(arrOfData) {
-		let max = defined_maximum_macro;
-		var val;
-		var ind;
+	/**
+	 * 			
+	 * @param {Object} arrayOfData Array of data from which the largest change
+	 * 							 is calculated
+	 * 
+	 * @returns {Object} 		 An array of element with largest change and the index
+	 *
+	 */
+	suddenChange: function suddenChange(arrayOfData) {
 
-		for (var i = 0; i<arrOfData.length-1; i++) {
-			if (arrOfData[i]!=null && arrOfData[i+1]!=null) {
-				val = Math.abs(arrOfData[i]-arrOfData[i+1]);
-				if (val>max) {
-					max = val;
-					ind = i;
+		let maxDifference = DEFINED_MAXIMUM_MACRO;
+		var abosoluteDifference;
+		var indexOfSuddenChange;
+
+		for (let i = 0; i < (arrayOfData.length - 1); i++) {
+
+			if (arrayOfData[i] != null && arrayOfData[i+1] != null) {
+
+				abosoluteDifference = Math.abs(arrayOfData[i]-arrayOfData[i+1]);
+
+				if (abosoluteDifference > maxDifference) {
+
+					maxDifference = abosoluteDifference;
+					indexOfSuddenChange = i;
 				}
 			}
 		}
-		return [max, ind+1];
+
+		return indexOfSuddenChange + 1;
 	}
 		
 };
