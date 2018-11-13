@@ -72,16 +72,22 @@ for (node in listOfNodes){
     for (att in dataFile[listOfNodes[node]]){
         if (target_variables.includes(att)) {
             vals = target_stat(dataFile[listOfNodes[node]][att]);
+			//since we need the maximum values for average, max, sudden_change, and variance but the minimum value for min, we need to have two separate logics
+			//Like: if (vals[0]>max) {max = vals[0]}   ...and...        if (vals[0]<min) {min = vals[0]}
+			//Just fused them together in the following three lines of code
             if ((vals[0]>max && process.argv[3]!="min") || (process.argv[3] == "min" && vals[0]<min)) {
                 max = vals[0];
                 min = vals[0];
                 
+				//if the intended statistics is average or variance, it's not sensible to find the index of the highest average so vals[1] will have nothing returned
                 if (process.argv[3]!="average" && process.argv[3]!="variance") {
                     if (process.argv[3]=="sudden_change") reading = ", which is between reading " + vals[1] + " and reading" + (vals[1]+1) + " of ";
                     else reading = ", which is on reading " + vals[1] + " of ";
                 }
+				
                 else reading = ", which is in ";
-
+				
+				//if the user want to calculate anything related to temperature or the fan speed, we need to consider both CPU1 and CPU2, but for CPU load and memory usage, we don't have 2 CPUs
                 if (target_variables.length == 1) equipment = listOfNodes[node] ;
                 else {
                     if (target_variable=="temperature") equipment = att.substr(14, 4) + " of " + listOfNodes[node];
