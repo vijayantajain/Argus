@@ -2,7 +2,12 @@
 
 This is a JavaScript project that is used in the monitoring system of the High Performance Computing Center (HPCC) at Texas Tech University.
 
-# USAGE
+## SETUP
+
+Install all the necessary packages by typing -  
+`(argus_dir)$ npm install`
+
+## USAGE
 
 There are three commandline variables that need to be provided - 
 
