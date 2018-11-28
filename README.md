@@ -21,8 +21,12 @@ And here is how you write them
 
 `(argus_dir)$ node src\argus.js \`  
 `--fileName=data.json \`  
-`--target_state=max \`  
+`--target_stat=max \`  
 `--target_variable=temperature`
+
+Or as a single command line prompt
+
+'node .\src\argus.js --fileName=data.json --target_stat=variance --target_variable=temperature'
 
 In case all the commandline variables are not provided, the program generates an `AssertError`.
 
