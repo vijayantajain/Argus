@@ -5,7 +5,9 @@ This is a JavaScript project that is used in the monitoring system of the High P
 ## SETUP
 
 Install all the necessary packages by typing -  
-`(argus_dir)$ npm install`
+`(argus_dir)$ npm install` (or just `yarn` if you're using it).
+
+**NOTE - `argus_dir` is the root directory of the project**
 
 ## USAGE
 
