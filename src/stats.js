@@ -1,5 +1,6 @@
 //Module containing some statistical functions to be used by `argus` module
 const math = require('mathjs');
+const assert = require('assert');
 
 const DEFINED_MAXIMUM_MACRO = -1e10;
 const DEFINED_MINIMUM_MACRO =  1e10;
@@ -16,6 +17,11 @@ module.exports = {
     average: function average(arrayOfData) {
 
 		arrayOfData = removeNullValues(arrayOfData);
+
+		if (arrayOfData.length == 0) {
+			return []
+		}
+
 
 		let temporarySum  = 0;
 		const NUM_OF_ITEMS = arrayOfData.length;
@@ -41,6 +47,10 @@ module.exports = {
 	max: function max(arrayOfData) {
 
 		arrayOfData = removeNullValues(arrayOfData);
+		if (arrayOfData.length == 0) {
+			return []
+		}
+
 
 		var max;
 		let index = 0;
@@ -73,6 +83,9 @@ module.exports = {
 	min: function min(arrayOfData) {
 
 		arrayOfData = removeNullValues(arrayOfData);
+		if (arrayOfData.length == 0) {
+			return []
+		}
 
 		var min;
 		let index = 0;
@@ -94,6 +107,9 @@ module.exports = {
 
 	variance: function variance(arrayOfData) {
 		arrayOfData = removeNullValues(arrayOfData);
+		if (arrayOfData.length == 0) {
+			return []
+		}
 
 		return [math.var(arrayOfData, 'uncorrected')];
 	},
@@ -109,6 +125,9 @@ module.exports = {
 	suddenChange: function suddenChange(arrayOfData) {
 
 		arrayOfData = removeNullValues(arrayOfData);
+		if (arrayOfData.length == 0) {
+			return []
+		}
 
 
 		let maxDifference = DEFINED_MAXIMUM_MACRO;

@@ -82,8 +82,12 @@ for (node in COMPUTE_NODES){
 
             vals = stats_function(dataFile[COMPUTE_NODES[node]][att]);
 
-            if ((vals[0] > max && target_stat != "min") || 
-                (vals[0] < min && target_stat == "min")) {
+            if (vals.length == 0) {
+                //pass
+            }
+
+            else if ((vals[0] > max && target_stat != "min") || 
+                     (vals[0] < min && target_stat == "min")) {
 
                     max = vals[0];
                     min = vals[0];
