@@ -36,6 +36,6 @@ describe('variance', function () {
 
 describe('suddenChange', function() {
     it('should return the value and index with sudden change', function () {
-        assert.equal(2, suddenChange([10, 11, 5]));
+        assert.equal(JSON.stringify([6, 2]), JSON.stringify(suddenChange([10, 11, 5])));
     })    
 });
