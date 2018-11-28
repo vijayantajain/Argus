@@ -33,19 +33,19 @@ var target_variables;
 
 switch (target_stat) {
     case "average":
-        target_stat = average_function;
+        stats_function = average_function;
         break;
     case "max":
-        target_stat = max_function;
+        stats_function = max_function;
         break;
     case "min":
-        target_stat = min_function;
+        stats_function = min_function;
         break;
     case "sudden_change":
-        target_stat = sudden_change_function;
+        stats_function = sudden_change_function;
         break;
     case "variance":
-        target_stat = variance_function;
+        stats_function = variance_function;
         break;
 
     default:
@@ -80,16 +80,16 @@ for (node in COMPUTE_NODES){
 
         if (target_variables.includes(att)) {
 
-            vals = target_stat(dataFile[COMPUTE_NODES[node]][att]);
+            vals = stats_function(dataFile[COMPUTE_NODES[node]][att]);
 
-            if ((vals[0] > max && process.argv[3] != "min") || 
-                (vals[0] < min && process.argv[3] == "min")) {
+            if ((vals[0] > max && target_stat != "min") || 
+                (vals[0] < min && target_stat == "min")) {
 
                     max = vals[0];
                     min = vals[0];
                     
-                    if (process.argv[3] != "average" && process.argv[3] != "variance") {
-                        if (process.argv[3]=="sudden_change") reading = ", which is between reading " + vals[1] + " and reading" + (vals[1]+1) + " of ";
+                    if (target_stat != "average" && target_stat != "variance") {
+                        if (target_stat=="sudden_change") reading = ", which is between reading " + vals[1] + " and reading " + (vals[1]+1) + " of ";
                         else reading = ", which is on reading " + vals[1] + " of ";
                     }
 
@@ -105,10 +105,10 @@ for (node in COMPUTE_NODES){
         }
     }
 
-    if (process.argv[3] == "min") max = min;
+    if (target_stat == "min") max = min;
 
-}fffffffff
-console.log("The maximum " + process.argv[3] + " " + target_variable + " is " + max.toFixed(5) + reading + equipment);
+}
+console.log("The maximum " + target_stat + " " + target_variable + " is " + max.toFixed(5) + reading + equipment);
 
 
 function checkCmdLineArgValidity(args) {
@@ -116,5 +116,5 @@ function checkCmdLineArgValidity(args) {
     assert.notEqual(args.fileName, undefined, 'Filename not provided');
     assert.notEqual(args.target_stat, undefined, 'Statistic to be calculated not provided');
     assert.notEqual(args.target_variable, undefined, 'Variable to be calculated not provided');
-fffffffff
+
 }
