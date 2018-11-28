@@ -72,11 +72,20 @@ var equipment;
 for (node in COMPUTE_NODES){
 
     for (att in dataFile[COMPUTE_NODES[node]]){
-
-        if (target_variables.includes(att)) {
-
+ 
+        var success = false;
+        try {
+            if (target_variables.includes(att)){
+            success = true;
+            }
+        } 
+        catch (e){
+        success = false;
+        // other exception handling
+        }
+        if (success) {
+        // equivalent of Python else goes here
             vals = target_stat(dataFile[COMPUTE_NODES[node]][att]);
-
             if ((vals[0] > max && process.argv[3] != "min") || 
                 (vals[0] < min && process.argv[3] == "min")) {
 
