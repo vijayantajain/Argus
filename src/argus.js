@@ -7,12 +7,11 @@ const MINIMUM_POSSIBLE_VALUE = -1e10;
 const MAXIMUM_POSSIBLE_VALUE =  1e10;
 
 const statsModule = require(path.join('..', 'src', 'stats.js'));
-const average = statsModule.average;
-const max = statsModule.max;
-const min = statsModule.min;
-const sudden_change = statsModule.sudden_change;
-const variance = statsModule.variance;
-const min = statsModule.min;
+const average_function = statsModule.average;
+const max_function = statsModule.max;
+const min_function = statsModule.min;
+const sudden_change_function = statsModule.suddenChange;
+const variance_function = statsModule.variance;
 
 //TODO
 //Assert that the file path and the file name exists!
@@ -29,19 +28,19 @@ var target_variables;
 
 switch (target_stat) {
     case "average":
-        target_stat = average;
+        target_stat = average_function;
         break;
     case "max":
-        target_stat = max;
+        target_stat = max_function;
         break;
     case "min":
-        target_stat = min;
+        target_stat = min_function;
         break;
     case "sudden_change":
-        target_stat = sudden_change;
+        target_stat = sudden_change_function;
         break;
     case "variance":
-        target_stat = variance;
+        target_stat = variance_function;
         break;
 
     default:
