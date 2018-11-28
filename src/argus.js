@@ -1,6 +1,8 @@
 // This is the main module which imports other modules to test out the functionalities
 
 const path = require('path');
+const assert = require('assert');
+const args = require('yargs').argv;
 const CWD = __dirname;
 
 const MINIMUM_POSSIBLE_VALUE = -1e10;
@@ -15,14 +17,17 @@ const variance_function = statsModule.variance;
 
 //TODO
 //Assert that the file path and the file name exists!
-const fileName = process.argv[2];
+// const fileName = process.argv[2];
+checkCmdLineArgValidity(args);
+
+const fileName = args.fileName;
 let dataFile = require(path.join(CWD, '..', 'data', fileName));
 const COMPUTE_NODES = Object.getOwnPropertyNames(dataFile);
 
 //Assert that the variables are correct
-console.log('Calculating  ' + process.argv[3]);
-var target_stat = process.argv[3];
-var target_variable = process.argv[4];
+console.log('Calculating  ' + args.target_stat);
+var target_stat = args.target_stat;
+var target_variable = args.target_variable;
 var target_variables; 
 
 
@@ -102,5 +107,14 @@ for (node in COMPUTE_NODES){
 
     if (process.argv[3] == "min") max = min;
 
-}
+}fffffffff
 console.log("The maximum " + process.argv[3] + " " + target_variable + " is " + max.toFixed(5) + reading + equipment);
+
+
+function checkCmdLineArgValidity(args) {
+
+    assert.notEqual(args.fileName, undefined, 'Filename not provided');
+    assert.notEqual(args.target_stat, undefined, 'Statistic to be calculated not provided');
+    assert.notEqual(args.target_variable, undefined, 'Variable to be calculated not provided');
+fffffffff
+}
