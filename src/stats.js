@@ -15,6 +15,8 @@ module.exports = {
      */
     average: function average(arrayOfData) {
 
+		arrayOfData = removeNullValues(arrayOfData);
+
 		let temporarySum  = 0;
 		const NUM_OF_ITEMS = arrayOfData.length;
 
@@ -37,6 +39,8 @@ module.exports = {
 	 */
 
 	max: function max(arrayOfData) {
+
+		arrayOfData = removeNullValues(arrayOfData);
 
 		var max;
 		let index = 0;
@@ -68,6 +72,8 @@ module.exports = {
 	 */
 	min: function min(arrayOfData) {
 
+		arrayOfData = removeNullValues(arrayOfData);
+
 		var min;
 		let index = 0;
 		const NUM_OF_ITEMS = arrayOfData.length;
@@ -87,6 +93,8 @@ module.exports = {
 
 
 	variance: function variance(arrayOfData) {
+		arrayOfData = removeNullValues(arrayOfData);
+
 		return [math.var(arrayOfData, 'uncorrected')];
 	},
 
@@ -99,6 +107,9 @@ module.exports = {
 	 *
 	 */
 	suddenChange: function suddenChange(arrayOfData) {
+
+		arrayOfData = removeNullValues(arrayOfData);
+
 
 		let maxDifference = DEFINED_MAXIMUM_MACRO;
 		var abosoluteDifference;
@@ -118,7 +129,21 @@ module.exports = {
 			}
 		}
 
-		return indexOfSuddenChange + 1;
+		return [maxDifference, indexOfSuddenChange + 1];
 	}
 		
 };
+
+function removeNullValues(arrayOfData) {
+	
+	const NUM_OF_ITEMS = arrayOfData.length;
+	let arrayOfCleanData = [];
+
+	for (let i = 0; i < NUM_OF_ITEMS; i++) {
+		if (arrayOfData[i] != null) {
+			arrayOfCleanData.push(arrayOfData[i]);
+		}
+	}
+
+	return arrayOfCleanData;
+}
