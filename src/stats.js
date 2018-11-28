@@ -84,11 +84,11 @@ module.exports = {
 
 			if (arrayOfData[i] != null && arrayOfData[i] < min) {
 					min = arrayOfData[i];
-					ind = i;
+					index = i;
 			}
 		}
 
-		return [min, ind+1];
+		return [min, index + 1];
 	},
 
 
